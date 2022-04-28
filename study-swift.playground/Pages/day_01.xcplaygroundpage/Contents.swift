@@ -103,3 +103,6 @@ enum SchoolDetail {
 
 let yourMiddleSchoolName = SchoolDetail.middle(name: "중학교")
 print("yourMiddleSchoolName: \(yourMiddleSchoolName)")
+
+
+

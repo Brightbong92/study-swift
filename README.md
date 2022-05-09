@@ -196,4 +196,106 @@ func unwrap(_ parameter: Int?) { // or func unwrap(parameter: Int?)
 
 ```
 
+``` swift
+// struct / 구조체
+// 값 복사
+// 값만 복사되는 개념, 참조 후에도 메모리에 할당된 주소가 복사된것이 아니기에 기존 me 객체는 기존값으로 유지가 된다.
+struct Student {
+    var name : String
+    var age : Int
+}
+
+var me = Student(name: "Jang", age: 31)
+
+var meClone = me
+
+print("참조 전 - me.name, age : \(me.name) \(me.age)") // me.name, age : Jang 31
+
+meClone.name = "Kim" // 참조 후
+meClone.age = 21 // 참조 후
+
+print("참조 후 - me.name, age : \(me.name) \(me.age)") // me.name, age : Jang 31
+print("참조 후 - meClone.name, age : \(meClone.name) \(meClone.age)") // meClone.name, age : Kim 21
+
+```
+
+``` swift
+// 클래스
+// 주소값 복사
+
+
+class Student {
+   var name : String
+   var age : Int
+   init(name : String, age: Int) {
+     self.name = name
+     self.age = age
+   }
+}
+
+var me = Student(name: "Jang", age:31)
+var meClone = me // 클래스의 경우, 메모리 주소값이 복사가되는 개념, 링킹이 된다 생각하면된다. 그리하여 meClone 값이 변경될 시 me의 값도 같이 변경된다.
+
+print("참조 전 - me.name, age : \(me.name) \(me.age)") // 참조 전 - me.name, age : Jang 31
+
+meClone.name = "Kim"
+meClone.age = 21
+
+print("참조 후 - me.name, age \(me.name) \(me.age)") // 참조 후 - me.name, age Kim 21
+print("참조 후 - meClone.name, age \(meClone.name) \(meClone.age)") // 참조후 -  meClone.name, age Kim 21
+
+```
+``` swift
+// 프로퍼티 옵저버 
+var myAge = 0 {
+    willSet {
+       print("값이 설정될 예정이다. myAge: \(myAge)")
+    }
+    didSet {
+        print("값이 설정될 되었다. myAge: \(myAge)")
+    }
+}
+
+myAge = 10
+// 값이 설정될 예정이다. myAge: 0
+// 값이 설정될 되었다. myAge: 10
+
+myAge = 20
+// 값이 설정될 예정이다. myAge: 10
+// 값이 설정될 되었다. myAge: 20
+
+myAge = 30
+// 값이 설정될 예정이다. myAge: 20
+// 값이 설정될 되었다. myAge: 30
+
+```
+
+``` swift
+
+// 함수, 메소드 정의
+func myFunction(name: String)-> String {
+    return "안녕하세요?! \(name) 입니다!"
+}
+
+// 함수, 메소드를 호출한다. call
+myFunction(name: "Jang")
+
+// 함수, 메소드 정의
+
+// 로직처리는 param값 name으로 하지만 호출할때 이름을 바꿀수있음 // 이름을 바꿀수 있다는 차이
+func myFunctionSecond(with name: String) -> String {
+    return "안녕하세요?! \(name) 입니다!"
+}
+
+myFunctionSecond(with: "hi 에이치아이")
+
+// 함수, 메소드 정의
+// _ 가 존재하면 해당하는 호출앞에 객체 키값 안넣어줘도 된다.
+func myFunctionThird(_ name: String) -> String{
+    return "안녕하세요?! \(name) 입니다!"
+}
+
+myFunctionThird("매개변수 이름 넣기 싫어")
+
+```
 

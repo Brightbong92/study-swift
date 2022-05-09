@@ -47,7 +47,7 @@ someVariable = nil
 
 // someVariable 이 비어 있으면 즉 값이 없으면 기본값으로 요놈을 넣겠다.
 
-// if let
+
 let myValue = someVariable ?? 10 // 기본값 넣는방법
 print("myValue : \(myValue)")
 

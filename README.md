@@ -2,6 +2,11 @@
 
 - 스위프트 개발이 하고 싶어서 공부하는 레포지토리입니다.
 
+## Reference 
+- 유튜브 
+- https://docs.swift.org/swift-book/LanguageGuide/TheBasics.html
+- <a href="https://yagom.net/" target="_blank" rel="noopener noreferrer">야곰</a>
+
 ## Online Code Playground
 http://online.swiftplayground.run/
 

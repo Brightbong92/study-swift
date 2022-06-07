@@ -304,3 +304,60 @@ myFunctionThird("매개변수 이름 넣기 싫어")
 
 ```
 
+``` swift 
+
+// xCode13 부터 colorLiteral 과 imageLiteral 이 작동하지 않게되었음.
+
+
+@State var textFieldText : String = ""
+let myGray = Color(#colorLiteral(red: 0.9403803662, green: 0.9403803662, blue: 0.9403803662, alpha: 1))
+
+var body : some View {
+  ScrollView {
+    VStack {
+     TextField("Literal Test", text: $textValue)
+//    .background(Color(#colorLiteral(...)) // X , View안에서는 리터럴 사용이 안된다.
+     .background(myGray) // 변수로 빼서 사용하면 된다.
+    }
+  }
+}
+```
+
+``` swift
+// Hashble struct 객체를 ForEach에서 사용할 경우는 id 프로퍼티를 구별 해줄수있는 Identifiable 프로토콜이 required 이다.
+
+// ItemModel.swift
+import Foundation
+
+struct ItemModel : Identifiable {
+    let id: String = UUID().uuidString
+    let title :String
+    let isCompleted : Bool
+}
+
+
+// ListView.swift
+struct ListView: View {
+    
+    @State var items: [ItemModel] = [
+        ItemModel(title: "This is the first title", isCompleted: false),
+        ItemModel(title: "This is the second!", isCompleted: true),
+        ItemModel(title: "Third!", isCompleted: false),
+    ]
+    
+    var body: some View {
+        List {
+        // Referencing initializer 'init(_:content:)' on 'ForEach' requires that 'ItemModel' conform to 'Identifiable'
+        // Model에 Identifiable이 없다면 에러가 나온다.
+        List {
+            ForEach(items) {item in
+                ListRowView(item: item)
+            }
+        }
+        .listStyle(PlainListStyle())
+        .navigationTitle("Todo List 📝")
+        .navigationBarItems(leading: EditButton(), trailing: NavigationLink("Add", destination: AddView()))
+    }
+}
+```
+
